@@ -56,8 +56,10 @@
             </Grid>
         </Viewbox>
         <Grid Grid.Row="1" Background="SkyBlue">
-            <Label x:Name="lblPlayerStatus" Content="Label" HorizontalAlignment="Left" Margin="33,0,0,0" VerticalAlignment="Top" FontSize="30"/>
+            <Label x:Name="lblPlayerStatus" Content="Label" HorizontalAlignment="Left" Margin="33,0,0,0" VerticalAlignment="Top" FontSize="25"/>
             <Button Content="Restart Game" HorizontalAlignment="Left" Margin="516,0,0,0" VerticalAlignment="Top" Height="45" Width="74" Click="Button_Click"/>
+            <Label x:Name="lblXWinner" Content="X WINS: 0" HorizontalAlignment="Center" Margin="0,4,0,0" VerticalAlignment="Top" FontSize="20"/>
+            <Label x:Name="lblOWinner" Content="O WINS: 0" HorizontalAlignment="Left" Margin="374,3,0,0" VerticalAlignment="Top" FontSize="20"/>
         </Grid>
     </Grid>
 

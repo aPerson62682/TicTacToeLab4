@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,10 +21,11 @@ namespace TickTacToeLab
     /// </summary>
     public partial class MainWindow : Window
     {
-        private bool XPlayer= true;
+        private bool XPlayer = true;
         private string newImage;
         private int boardFull = 0;
-
+        private int xWinCount = 0;
+        private int oWinCount = 0;
 
         public MainWindow()
         {
@@ -31,9 +33,9 @@ namespace TickTacToeLab
             lblPlayerStatus.Content = "Good Luck! It's X's Turn to play.";
             ResetGame();
 
-        } 
+        }
 
-
+        // CODE GIVEN IN CLASS EXAMPLE
         //private void blankImg0_0_MouseDown(object sender, MouseButtonEventArgs e)
         //{
         //   blankImg0_0.Source = new BitmapImage(new Uri("Images/tic-tac-toe_x.png", UriKind.Relative));
@@ -47,7 +49,7 @@ namespace TickTacToeLab
         {
             gameBoard.ResetBoard();
             XPlayer = true;
-            boardFull = 0;
+            boardFull = 0;  
             lblPlayerStatus.Content = "Good Luck! It's X's Turn to play.";
 
             foreach (var child in BoardGrid.Children)
@@ -56,15 +58,19 @@ namespace TickTacToeLab
                 {
                     image.Source = new BitmapImage(new Uri("Images/blankImg.png", UriKind.Relative));
                 }
-             }
-      }
+            }
+        }
 
         private void imageTemplate_MouseDown(object sender, MouseButtonEventArgs e)
         {
-         
+
             if (sender is Image clickableImage)
-           {
-                if (clickableImage.Source.ToString().Contains("blankImg.png"))
+            {
+                int row = Grid.GetRow(clickableImage);
+                int col = Grid.GetColumn(clickableImage);
+
+
+                if (gameBoard.PlaceMove(row, col))
                 {
                     if (XPlayer)
                     {
@@ -77,24 +83,59 @@ namespace TickTacToeLab
                         lblPlayerStatus.Content = "X's Turn";
                     }
 
-                clickableImage.Source = new BitmapImage(new Uri(newImage, UriKind.Relative));
-                XPlayer = !XPlayer;
-                boardFull++;
-                
-                    if (boardFull >= 9)
+
+                    clickableImage.Source = new BitmapImage(new Uri(newImage, UriKind.Relative));
+
+                    var winner = gameBoard.WinnerCheck();
+                    if (winner != PlayerEnum.NONE)
+                    {
+                        if (winner == PlayerEnum.X)
+                        {
+                            xWinCount++;
+                            lblXWinner.Content = $"X WINS: {xWinCount}";
+                        }
+                        else if (winner == PlayerEnum.O)
+                        {
+                            oWinCount++;
+                            lblOWinner.Content = $"O WINS: {oWinCount}";
+                        }
+
+                        lblPlayerStatus.Content = $"Player {winner} Wins!!";
+                        MessageBox.Show($"Player {winner} Wins!!", "Game Over", MessageBoxButton.OK, MessageBoxImage.Information);
+                        ResetGame();
+                        return;
+                    }
+
+                    boardFull++;
+                    if (boardFull >= 9 || gameBoard.DrawCheck())
                     {
                         lblPlayerStatus.Content = "FULL!";
+                        MessageBox.Show("It's a draw!", "Game Over", MessageBoxButton.OK, MessageBoxImage.Information);
+                        ResetGame();
+                        return;
                     }
-                }
+
+                if (XPlayer)
+                    {
+                        XPlayer = false;
+                    } else
+                    {
+                        XPlayer = true;
+                    } 
+                gameBoard.SwitchPlayers();
 
             }
+            else
+            {
+                    MessageBox.Show("You Can't put it there!", "Invalid Move", MessageBoxButton.OK, MessageBoxImage.Error);
 
+                }
+            }
         }
 
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            ResetGame();
+            private void Button_Click(object sender, RoutedEventArgs e)
+            {
+                ResetGame();
+            }
         }
     }
-}
