@@ -31,7 +31,8 @@ namespace TickTacToeLab
             lblPlayerStatus.Content = "Good Luck! It's X's Turn to play.";
             ResetGame();
 
-        }
+        } 
+
 
         //private void blankImg0_0_MouseDown(object sender, MouseButtonEventArgs e)
         //{

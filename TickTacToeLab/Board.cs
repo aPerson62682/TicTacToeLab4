@@ -17,8 +17,6 @@ namespace TickTacToeLab
             ResetBoard();
         }
 
-
-
         public void ResetBoard()
         {
             for (int x = 0; x < 3; x++)
