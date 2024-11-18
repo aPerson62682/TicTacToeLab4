@@ -56,10 +56,19 @@
             </Grid>
         </Viewbox>
         <Grid Grid.Row="1" Background="SkyBlue">
-            <Label x:Name="lblPlayerStatus" Content="Label" HorizontalAlignment="Left" Margin="33,0,0,0" VerticalAlignment="Top" FontSize="25"/>
-            <Button Content="Restart Game" HorizontalAlignment="Left" Margin="516,0,0,0" VerticalAlignment="Top" Height="45" Width="74" Click="Button_Click"/>
-            <Label x:Name="lblXWinner" Content="X WINS: 0" HorizontalAlignment="Center" Margin="0,4,0,0" VerticalAlignment="Top" FontSize="20"/>
-            <Label x:Name="lblOWinner" Content="O WINS: 0" HorizontalAlignment="Left" Margin="374,3,0,0" VerticalAlignment="Top" FontSize="20"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="lblPlayerStatus" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Grid.Column="0" Margin="10,5"/>
+            <Button x:Name="btnClearBoard" Content="Clear Board" HorizontalAlignment="Right" VerticalAlignment="Top" Height="45" Width="74" Grid.Column="4"  Click="btnClearBoard_Click" Margin="10,5"/>
+            <Button x:Name="btnResetPoints" Content="Reset Points" HorizontalAlignment="Right" VerticalAlignment="Top" Height="45" Width="74" Grid.Column="5" Margin="10,5" Click="btnResetPoints_Click"/>
+            <Label x:Name="lblXWinner" Content="X WINS: 0" VerticalAlignment="Top" FontSize="20" Grid.Column="2" Margin="10,5"/>
+            <Label x:Name="lblOWinner" Content="O WINS: 0" VerticalAlignment="Top" FontSize="20" Grid.Column="3" Margin="10,5"/>
         </Grid>
     </Grid>
 

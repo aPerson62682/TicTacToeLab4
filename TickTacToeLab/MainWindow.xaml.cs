@@ -133,9 +133,20 @@ namespace TickTacToeLab
             }
         }
 
-            private void Button_Click(object sender, RoutedEventArgs e)
+            private void btnClearBoard_Click(object sender, RoutedEventArgs e)
             {
                 ResetGame();
             }
+
+        private void btnResetPoints_Click(object sender, RoutedEventArgs e)
+        {
+            xWinCount = 0;
+            oWinCount = 0;
+            lblOWinner.Content = "O WINS: 0";
+            lblXWinner.Content = "X WINS: 0";
+
         }
+
+    
+    }
     }
